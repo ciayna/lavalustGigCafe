@@ -57,6 +57,7 @@
                                 <div class="mb-3"><input class="form-control" id="email" type="email" name="email" placeholder="Email"></div>
                                 <div class="mb-3"><input size="50" class="form-control" id="password" type="password" name="password" placeholder="Password"></div>
                                 <div class="mb-3"><input class="form-control" id="confirmpassword" type="password" name="confirmpassword" placeholder="Confirm Password"></div>
+                                <div class="mb-3"><input class="form-control" id="user_type" type="hidden" name="user_type" value="user"></div>
                                 <div class="mb-3"><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit" value="Sign up">Sign up</button></div>
                                 <p class="text-muted">Already have an account?&nbsp;<a href="/login">Log in</a></p>
                             </form>

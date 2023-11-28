@@ -58,14 +58,19 @@ class employeeModel extends Model {
         return $this->db->table('table_user')->where('username',$username)->get();
     }
 
-    public function RegUser($name, $username, $email, $password){
+    public function RegUser($name, $username, $email, $password, $user_type){
         $bind = [
             'name' => $name,
             'username' => $username,
             'email' => $email,
             'password' => $password,
+            'user_type' => $user_type,
         ];
         return $this->db->table('table_user')->insert($bind);
+    }
+
+    public function LoginUser($username){
+        return $this->db->table('table_user')->where('username',$username)->get();
     }
 }
 

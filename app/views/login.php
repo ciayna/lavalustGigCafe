@@ -38,9 +38,23 @@
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"></path>
                                 </svg></div>
                                 <div class="transparent-form-container">
-                            <form action="/login" method="post">
-                                <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-                                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+                            <!-- flashmessage -->
+                            <?php if(isset($_SESSION['msg'])): ?>
+                            <div class="fadeIn first">
+                            <h2 class='msg'><?= $_SESSION['msg'];?></h2>
+                            <div>
+                            <?php endif; ?>
+
+
+                            <!-- formvalidation errors -->
+                            <?php if(isset($errors)): ?>
+                            <div class="fadeIn first">
+                            <h2 class='msg'><?= $errors; ?></h2>
+                            <div>
+                            <?php endif; ?>
+                            <form action="/signin" method="post">
+                                <div class="mb-3"><input class="form-control" type="text" name="username_log" placeholder="Username"></div>
+                                <div class="mb-3"><input class="form-control" type="password" name="password_log" placeholder="Password"></div>
                                 <div class="mb-3"><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">Log in</button></div>
                                 <p class="text-muted">Don't have an account yet?&nbsp;<a href="/signup">Signup</a></p>
                             </form>

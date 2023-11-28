@@ -59,5 +59,6 @@ $router->get('/login', 'homeview::login');
 
 //para sa login at register
 $router->match('/signup', 'homeview::signup', 'GET|POST');
+$router->match('/signin', 'homeview::signin', 'GET|POST');
 
 
