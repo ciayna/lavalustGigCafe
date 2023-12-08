@@ -37,56 +37,49 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>404 Page Not Found</title>
-	<style type="text/css">
 
-	*{
-	    transition: all 0.6s;
-	}
+    <head>
+        <meta charset="utf-8">
+        <title>CaterServ - Catering Services Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
 
-	html {
-	    height: 100%;
-	}
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playball&display=swap" rel="stylesheet">
 
-	body{
-	    font-family: 'Lato', sans-serif;
-	    color: #888;
-	    margin: 0;
-	}
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-	#main{
-	    display: table;
-	    width: 100%;
-	    height: 100vh;
-	    text-align: center;
-	}
+        <!-- Libraries Stylesheet -->
+        <link href="public/CRS1/lib/animate/animate.min.css" rel="stylesheet">
+        <link href="public/CRS1/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="public/CRS1/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
 
-	.fof{
-		  display: table-cell;
-		  vertical-align: middle;
-	}
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="public/CRS1/css/bootstrap.min.css" rel="stylesheet">
 
-	.fof h1{
-		  font-size: 50px;
-		  display: inline-block;
-		  padding-right: 12px;
-		  animation: type .5s alternate infinite;
-	}
-
-	@keyframes type{
-		  from{box-shadow: inset -3px 0px 0px #888;}
-		  to{box-shadow: inset -3px 0px 0px transparent;}
-	}
-	</style>
-</head>
-<body>
-	<div id="main">
-    	<div class="fof">
-	        <h1><?php echo $heading; ?></h1>
-	        <p><?php echo $message; ?></p>
-    	</div>
-	</div>
+        <!-- Template Stylesheet -->
+        <link href="public/CRS1/css/style.css" rel="stylesheet">
+    </head>
+	<body>
+        <!-- 404 Start -->
+        <div class="container-fluid py-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container text-center">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
+                        <h1 class="display-1">404</h1>
+                        <h1 class="mb-4">Page Not Found</h1>
+                        <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe go to our home page or try to use a search?</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5" href="">Go Back To Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 404 End -->
 </body>
 </html>

@@ -7,27 +7,79 @@ class homeview extends Controller {
     parent:: __construct();
     $this->call->model('employeeModel', 'users');
   }
+  public function main() {
+    $this->call->view('main');
+    }
 
-  public function home() {
-
-  $this->call->view('home');
-  }
-
-  public function contacts() {
-  $this->call->view('contacts');
-  }
-
-  public function packages() {
-  $this->call->view('packages');
-  }
-
-  public function crew() {
-  $this->call->view('crew');
-  }
+  public function getStart() {
+    $this->call->view('getStart');
+    }
 
   public function login() {
-  $this->call->view('login');
+        $this->call->view('/auth/login');
+    }
+  public function register()  {
+        $this->call->view('/auth/register');
+    }
+
+  public function home() {
+    $this->call->view('home');
+    }
+
+  public function about() {
+    $this->call->view('about');
+    }
+
+  public function service() {
+    $this->call->view('service');
+    }
+
+  public function event() {
+    $this->call->view('event');
+    }
+
+  public function contact() {
+    $this->call->view('contact');
+    }
+
+  public function menu() {
+    $this->call->view('menu');
+    }
+
+  public function book() {
+    $this->call->view('book');
+    }
+
+  public function team() {
+    $this->call->view('team');
+    }
+
+  public function blog() {
+    $this->call->view('blog');
+    }
+
+  public function testimonial() {
+    $this->call->view('testimonial');
+    }
+
+  public function userAdmin() {
+    $data = [
+      'user' => $this->users->GetUserData(),
+    ];
+
+    $this->call->view('userAdmin', $data);
   }
+
+  public function deleteUser($id) {
+    $ID = $id;
+    $result = $this->users->DeleteUserData($ID);
+    if($result) {
+        $data = [
+            'user' => $this->users->GetUserData(),
+        ];
+        return redirect('/userAdmin', $data);
+    }
+}  
 
   //para sa login at register
   public function signin() {
@@ -44,7 +96,7 @@ class homeview extends Controller {
           $data = [
               'errors' => $this->form_validation->errors(),
           ];
-          $this->call->view('login', $data);
+          $this->call->view('/login', $data);
       }
       else {
 
@@ -66,7 +118,7 @@ class homeview extends Controller {
                   );
                   $this->session->set_userdata($userdata);
                   if ($userdata['user_type'] === 'admin'){
-                    redirect('/');
+                    redirect('/mainview');
                   }
                   else {
                     redirect('/home');
@@ -83,7 +135,7 @@ class homeview extends Controller {
       }
     }
     else{
-      $this->call->view('login');
+      $this->call->view('/auth/login');
     }
   }
   public function signup() {
@@ -112,7 +164,7 @@ class homeview extends Controller {
           $data = [
               'errors' => $this->form_validation->errors(),
           ];
-          $this->call->view('signup', $data);
+          $this->call->view('/register', $data);
       }
       else {
           $name = $_POST['name'];   
@@ -125,26 +177,88 @@ class homeview extends Controller {
           
           if($res_email) {
               $this->session->set_flashdata('msg','A user exists with that email.');
-              redirect('/signup');
+              redirect('/register');
           } else if ($res_name) {
               $this->session->set_flashdata('msg','A user exists with that username.');
-              redirect('/signup');
+              redirect('/register');
           } else {
               $result = $this->users->RegUser($name ,$username, $email, $password, $user_type);
               if ($result) {
                   $this->session->set_flashdata('msg','You have registered sucessfully.');
-                  redirect('/signup');
+                  redirect('/register');
               } else {
                   $this->session->set_flashdata('msg','Something went wrong.');
-                  redirect('/signup');
+                  redirect('/register');
               }
           }
       }
   }
   else{
-    $this->call->view('signup');
+    $this->call->view('auth/register');
   }
 }
 
+public function signup1() {
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $this->call->library('form_validation');
+    $this->form_validation
+    ->name('name')
+      ->required()  
+    ->name('username')
+      ->required()
+      ->min_length(6)
+      ->max_length(30)
+    ->name('email')
+      ->required()
+      ->valid_email()
+    ->name('password')
+      ->required()
+      ->custom_pattern("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", 'The password must contain a minimum of eight characters, at least one letter, one number and one special character.')
+    ->name('confirmpassword')
+      ->matches('password')
+      ->required();
+
+    if ($this->form_validation->run() == FALSE)
+    {
+        $data = [
+            'errors' => $this->form_validation->errors(),
+            'user' => $this->users->GetUserData(),  
+        ];
+        $this->call->view('/userAdmin', $data);
+    }
+    else {
+        $name = $_POST['name'];   
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $user_type = $_POST['user_type'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $res_email = $this->users->CheckDupEmail($email);
+        $res_name = $this->users->CheckDupUsername($username);
+        
+        if($res_email) {
+            $this->session->set_flashdata('msg','A user exists with that email.');
+            redirect('/userAdmin');
+        } else if ($res_name) {
+            $this->session->set_flashdata('msg','A user exists with that username.');
+            redirect('/userAdmin');
+        } else {
+            $result = $this->users->RegUser($name ,$username, $email, $password, $user_type);
+            if ($result) {
+                $this->session->set_flashdata('msg','User added sucessfully.');
+                redirect('/userAdmin');
+            } else {
+                $this->session->set_flashdata('msg','Something went wrong.');
+                redirect('/userAdmin');
+            }
+        }
+    }
 }
+else{
+  $this->call->view('/userAdmin');
+}
+}
+
+}
+
 ?>

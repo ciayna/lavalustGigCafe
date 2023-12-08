@@ -43,11 +43,32 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |
 |
 */
-$router->get('/', 'Welcome::mainview');
-$router->get('/mainview', 'Welcome::mainview');
+$router->get('/', 'homeview::getStart');
+$router->match('/main', 'homeview::main', 'GET|POST');
+$router->get('/home', 'homeview::home');
+
+
+$router->get('/home', 'homeview::home');
+$router->get('/about', 'homeview::about');
+$router->get('/service', 'homeview::service');
+$router->get('/event', 'homeview::event');
+$router->get('/menu', 'homeview::menu');
+$router->get('/book', 'homeview::book');
+$router->get('/blog', 'homeview::blog');
+$router->get('/team', 'homeview::team');
+$router->get('/testimonial', 'homeview::testimonial');
+$router->get('/contact', 'homeview::contact');
+$router->get('/login', 'homeview::login');
+$router->get('/logout', 'homeview::logout');
+$router->get('/register', 'homeview::register');
+
+
+$router->match('/mainview', 'Welcome::mainview', 'GET|POST');
 $router->post('/save', 'Welcome::save');
-$router->get('/edit/(:any)', 'Welcome::edit');
+$router->post('/save1', 'Welcome::save1');
+$router->match('/editview/(:any)', 'Welcome::editview', 'GET|POST');
 $router->get('/delete/(:any)', 'Welcome::delete');
+$router->get('/deleteUser/(:any)', 'homeview::deleteUser');
 $router->get('/mail', 'Welcome::mail');
 
 $router->get('/home', 'homeview::home');
@@ -55,10 +76,12 @@ $router->get('/contacts', 'homeview::contacts');
 $router->get('/packages', 'homeview::packages');
 $router->get('/crew', 'homeview::crew');
 $router->get('/login', 'homeview::login');
+$router->get('/userAdmin', 'homeview::userAdmin');
 
 
 //para sa login at register
 $router->match('/signup', 'homeview::signup', 'GET|POST');
+$router->match('/signup1', 'homeview::signup1', 'GET|POST');
 $router->match('/signin', 'homeview::signin', 'GET|POST');
 
 

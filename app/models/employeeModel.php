@@ -4,48 +4,67 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 class employeeModel extends Model {
 
     public function GetData(){
-        $data = $this->db->table('table_employee')->get_all();
+        $data = $this->db->table('table_reservations')->get_all();
 		return $data;
     }
 
     public function SelectedData($id){
         $ID = $id;
-        $data = $this->db->table('table_employee')->where('id',$ID)->get();
+        $data = $this->db->table('table_reservations')->where('id',$ID)->get();
 		return $data;
     }
 
     public function DeleteData($id){
         $ID = $id;
-        $data = $this->db->table('table_employee')->where('id',$ID)->delete();
+        $data = $this->db->table('table_reservations')->where('id',$ID)->delete();
 		return $data;
     }
 
-    public function SaveData($name,$email,$address,$phone){
+    public function DeleteUserData($id){
+        $ID = $id;
+        $data = $this->db->table('table_user')->where('id',$ID)->delete();
+		return $data;
+    }
+
+
+    public function SaveData($name,$email,$address,$phone,$status,$event,$date){
 
         $bind = [
             'name' => $name,
             'email' => $email,
             'address' => $address,
             'phone' => $phone,
+            'status' => $status,
+            'event' => $event,
+            'date' => $date,
         ];
         
-        return $this->db->table('table_employee')->insert($bind);
+        return $this->db->table('table_reservations')->insert($bind);
     }
-    public function UpdateData($Id,$name,$email,$address,$phone){
+    public function UpdateData($Id,$name,$email,$address,$phone,$status,$event,$date){
         $ID = $Id;
         $bind = [
             'name' => $name,
             'email' => $email,
             'address' => $address,
             'phone' => $phone,
+            'status' => $status,
+            'event' => $event,
+            'date' => $date,
+
         ];
         
-        return $this->db->table('table_employee')->where('id',$ID)->update($bind);
+        return $this->db->table('table_reservations')->where('id',$ID)->update($bind);
     }
 
 
 
     //para sa login tsaka register
+    public function GetUserData(){
+        $userData = $this->db->table('table_user')->get_all();
+        return $userData;
+    }
+
     public function GetUser($id){
         return $this->db->table('table_user')->where('id',$id)->get();
     }
